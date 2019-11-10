@@ -26,7 +26,7 @@ RUN /usr/bin/find /etc/apache2/ -type f -exec grep -l "/var/www/html" {} \; | xa
 RUN apt-get install -y mariadb-common mariadb-server mariadb-client
 
 # Permite el acceso a mysql desde equipos remotos (solo desarrollo)
-RUN find /etc/mysql -type f -exec grep -El "^bind-address" {} \; | xargs -i sed -i "s/^bind-address/#bind-address/g" {} 
+RUN find /etc/mysql -type f -exec grep -El "^bind-address" {} \; | xargs -i sed -i "s/^bind-address/#bind-address/g" {}
 
 # Instala composer (aunque de momento no se utiliza en este proyecto)
 RUN apt-get install -y composer
