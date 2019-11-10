@@ -34,7 +34,8 @@ RUN apt-get install -y composer
 # Crea el usuario copeito (útil para ejecutar composer, puesto que no se permite el uso de root)
 RUN useradd copeito -m -G www-data
 
-ADD start.sh /start.sh
+ADD db/app.sql /app.sql
+ADD docker/start.sh /start.sh
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
