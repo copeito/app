@@ -5,6 +5,8 @@
 mysql -e "create database app"
 mysql -e "grant all on app.* to copeito@127.0.0.1 identified by 'secreto'";
 
+mysql app < app.sql
+
 # Lanza una shell bash
 /bin/bash;
 
