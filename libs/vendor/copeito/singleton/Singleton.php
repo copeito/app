@@ -1,9 +1,9 @@
 <?php
-namespace traits;
+namespace copeito\singleton;
 
 trait Singleton
 {
-    protected static $instance;
+    public static $instance;
 
     final public static function getInstance($id = null)
     {

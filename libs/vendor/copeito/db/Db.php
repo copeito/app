@@ -1,9 +1,9 @@
 <?php
 namespace db;
 
-use \traits\Multiton;
+use \traits\Singleton;
 
 class Db extends \PDO
 {
-    use Multiton;
+    use Singleton;
 }

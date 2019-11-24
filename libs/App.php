@@ -1,25 +1,30 @@
 <?php
+spl_autoload_register(function($class)
+{
+    $libs = (include '../config/libs.php');
+
+    if ($libs[$class]){
+        include_once $libs[$class];
+    }else{
+        include_once '../libs/'.str_replace('\\', '/', $class).'.php';
+    }
+});
+
+class_alias('\copeito\singleton\Singleton', 'burri\Baralloco');
+
 use \db\Db;
 use \db\Table;
-use traits\Singleton;
+use burri\Baralloco;
 
 class App
 {
-    use Singleton;
+    use Baralloco;
 
     public function __get($name)
     {
         switch($name){
             case 'config':
                 $result = (include '../config/config.php');
-                break;
-            case 'db':
-                $result = Db::getInstance(
-                    'mysql:host='.$this->config['db']['host'].
-                        ';dbname='.$this->config['db']['name'],
-                    $this->config['db']['user'],
-                    $this->config['db']['password']
-                );
                 break;
         }
 
@@ -30,6 +35,10 @@ class App
     {
         echo "Run ".$this->config['db']['user'];
 
-        Table::$db = $this->db;
+        /*foreach(Table::getInstance('user')->getFields() as $field){
+            echo $field."<br>";
+        }*/
+
+        //Table::$db = $this->db;
     }
 }

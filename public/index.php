@@ -1,7 +1,4 @@
 <?php
-spl_autoload_register(function($class)
-{
-    include_once '../libs/'.str_replace('\\', '/', $class).'.php';
-});
+include_once '../libs/App.php';
 
 App::getInstance()->run();
