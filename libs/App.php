@@ -1,24 +1,14 @@
 <?php
-spl_autoload_register(function($class)
-{
-    $libs = (include '../config/libs.php');
-
-    if ($libs[$class]){
-        include_once $libs[$class];
-    }else{
-        include_once '../libs/'.str_replace('\\', '/', $class).'.php';
-    }
-});
-
-class_alias('\copeito\singleton\Singleton', 'burri\Baralloco');
-
+/**
+ *    App framework class
+ *    @author David Rey
+ */
 use \db\Db;
 use \db\Table;
-use burri\Baralloco;
 
 class App
 {
-    use Baralloco;
+    use Singleton;
 
     public function __get($name)
     {
@@ -34,11 +24,5 @@ class App
     public function run()
     {
         echo "Run ".$this->config['db']['user'];
-
-        /*foreach(Table::getInstance('user')->getFields() as $field){
-            echo $field."<br>";
-        }*/
-
-        //Table::$db = $this->db;
     }
 }

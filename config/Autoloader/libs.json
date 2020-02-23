@@ -1,0 +1,6 @@
+{
+    "Singleton" : {
+        "name" : "copeito\\singleton\\Singleton",
+        "path" : "../libs/vendor/copeito/singleton/Singleton.php"
+    }
+}
