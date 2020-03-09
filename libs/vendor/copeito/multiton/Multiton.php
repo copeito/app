@@ -3,7 +3,7 @@
  *    Implements in user class multiton pattern
  *    @author David Rey
  */
-namespace traits;
+namespace copeito\multiton;
 
 trait Multiton
 {
@@ -19,15 +19,17 @@ trait Multiton
      */
     final public static function getInstance(...$args) : object
     {
+        $id = null;
+
         $class = static::class;
 
-        $id = implode('.', func_get_args());
+        $id = json_encode($args);
 
-        if (!static::$instances[$class]){
+        if (!@static::$instances[$class]){
             static::$instances[$class] = array();
         }
 
-        if (!static::$instances[$class][$id]){
+        if (!@static::$instances[$class][$id]){
             static::$instances[$class][$id] = new $class(...$args);
 
             if (method_exists($class, 'init')){

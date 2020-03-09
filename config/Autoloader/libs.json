@@ -2,5 +2,13 @@
     "Singleton" : {
         "name" : "copeito\\singleton\\Singleton",
         "path" : "../libs/vendor/copeito/singleton/Singleton.php"
+    },
+    "Multiton" : {
+        "name" : "copeito\\multiton\\Multiton",
+        "path" : "../libs/vendor/copeito/multiton/Multiton.php"
+    },
+    "Db" : {
+        "name" : "copeito\\db\\Db",
+        "path" : "../libs/vendor/copeito/db/Db.php"
     }
 }

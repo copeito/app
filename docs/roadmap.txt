@@ -1,5 +1,8 @@
 Continuar autoloader apoyandome en class_alias y en Lib.php (Evaluar necesidad de utilizar Lib.php)
 
 Mostrar campos de una tabla en pantalla
+	-> Instalar en el contenedor docker la libreria php-mysql
+	-> Dar permisos al usuario copeito con password "secreto" para conectarse al mysql del contenedor
+	-> Revisar clase Multiton, gestión de variadic parameter para calcular el $id del objeto 
 
 Diseñar cómo y cuando se debe inicializar el objeto DB
