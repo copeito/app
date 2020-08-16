@@ -7,6 +7,25 @@ class App
 {
     use Singleton;
 
+    use LazyLoader {
+        init as lazyLoaderInitializer;
+    }
+
+    protected function init()
+    {
+        $this->lazyLoaderInitializer(
+            array(
+                'db' => function(){
+                    $db = new db\Db;
+
+                    db\Table::$db = $db;
+
+                    return new $db;
+                }
+            )
+        );
+    }
+
     /*public function __get($name)
     {
         switch($name){
@@ -20,7 +39,13 @@ class App
 
     public function run()
     {
-        $Db = Db::getInstance();
+        /*foreach($this->db->query('show tables') as $table){
+            echo $table['Tables_in_app']."<br>";
+        }*/
+
+        foreach($this->db::$Table::list() as $table){
+            echo "Elem es ".$table."<br>";
+        }
         echo "Run <br>";
     }
 }

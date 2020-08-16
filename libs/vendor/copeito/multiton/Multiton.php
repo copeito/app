@@ -52,7 +52,7 @@ trait Multiton
     protected function __construct($id = null)
     {
         if (method_exists($this, 'init')){
-            $this->init();
+            $this->init($id);
         }
     }
 }

@@ -7,8 +7,16 @@
         "name" : "copeito\\multiton\\Multiton",
         "path" : "../libs/vendor/copeito/multiton/Multiton.php"
     },
-    "Db" : {
+    "LazyLoader" : {
+        "name" : "copeito\\lazyLoader\\LazyLoader",
+        "path" : "../libs/vendor/copeito/lazyLoader/LazyLoader.php"
+    },
+    "db\\Db" : {
         "name" : "copeito\\db\\Db",
         "path" : "../libs/vendor/copeito/db/Db.php"
+    },
+    "db\\Table" : {
+        "name" : "copeito\\db\\Table",
+        "path" : "../libs/vendor/copeito/db/Table.php"
     }
 }

@@ -1,8 +1,13 @@
-Continuar autoloader apoyandome en class_alias y en Lib.php (Evaluar necesidad de utilizar Lib.php)
+Desvincular Multiton y Singleton de todas las clases excepto app
+	-> app gestionará la inyección del objeto Db en las instancias de la clase query
 
-Mostrar campos de una tabla en pantalla
-	-> Instalar en el contenedor docker la libreria php-mysql
-	-> Dar permisos al usuario copeito con password "secreto" para conectarse al mysql del contenedor
+Insertar, actualizar y mostrar campos de una tabla en pantalla
 	-> Revisar clase Multiton, gestión de variadic parameter para calcular el $id del objeto 
+
+	-> Para insertar un registro el sistema creará un NUEVO OBJETO query e ejecutará dicha query
+		-> Podrían crearse clases derivadas en función de los distintos tipos de consulta, a saber:
+			db/Insert extends Query
+			db/Update extends Query
+			db/Select extends Query
 
 Diseñar cómo y cuando se debe inicializar el objeto DB

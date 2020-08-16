@@ -1,16 +1,18 @@
 <?php
 namespace copeito\db;
 
-use Singleton;
-
 class Db extends \PDO
 {
-    use Singleton{
-        getInstance as protected singletonGetInstance;
-    }
+    public static $Table = Table::class;
 
-    protected function __construct(array $args)
+    protected $dbname;
+
+    public function __construct(array $args = null)
     {
+        if (!$args){
+            $args = (include 'config.php');
+        }
+
         try{
             parent::__construct(
                 strtolower($args['server']['type']).':'.
@@ -22,17 +24,27 @@ class Db extends \PDO
                   \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
                 )
             );
+
+            $this->dbname = $args['db']['name'];
+
         }catch (PDOException $e){
             echo $e->getMessage();
         }
     }
 
-    public static function getInstance(...$args) : Db
+    public function __get($name) : string
     {
-        if (!$args){
-            $args = (include 'config.php');
+        $return = null;
+
+        if ($name == 'dbname'){
+            $return = $this->query('select database()')->fetchColumn();
         }
 
-        return static::singletonGetInstance($args);
+        return $return;
+    }
+
+    public function query(string $stmt)
+    {
+        return parent::query($stmt);
     }
 }

@@ -1,31 +1,39 @@
 <?php
-namespace db;
-
-use \traits\Multiton;
-use \traits\LazyLoader;
+namespace copeito\db;
 
 class Table
 {
-    use Multiton;
-    use LazyLoader {
-        init as traitInitializer;
+    protected $name;
+
+    public static $db;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
     }
 
-    public $db;
-
-    protected function init()
+    public static function list() : array
     {
-        $this->traitInitializer(
-            array(
-                'db' => function(){
-                    print "cacheando...<br>";
-                    return Db::getInstance();
-                }
-            )
-        );
+        $tables = [];
 
-        echo 'db es '.get_class($this->db).'<br>';
-        echo 'ins '.static::$instances.'<br>';
+        foreach (static::$db->query('show tables') as $row){
+            $tables[] = new table(
+                $row['Tables_in_'.static::$db->dbname]
+            );
+        }
+
+        return $tables;
+    }
+
+    public function filter() : array
+    {
+        $records = [];
+
+        foreach (static::$db->query('select * from '.$this->name) as $row){
+            $records = new Record($this, $row);
+        }
+
+        return $records;
     }
 
     public function getFields() : array
@@ -44,5 +52,10 @@ class Table
     public function getData() : array
     {
 
+    }
+
+    public function __toString() : string
+    {
+        return $this->name;
     }
 }

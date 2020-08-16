@@ -1,5 +1,5 @@
 <?php
-namespace traits;
+namespace copeito\lazyLoader;
 
 class LazyLoaderException extends \Exception {};
 
