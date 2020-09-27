@@ -1,7 +1,7 @@
 <?php
 namespace copeito\db;
 
-class Db extends \PDO
+class Db extends \PDO implements \core\interfaces\Db
 {
     public static $Table = Table::class;
 

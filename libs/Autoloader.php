@@ -3,6 +3,9 @@
  *    Autoloading classes loading class with suport to aliasses
  *    @author David Rey
  */
+
+class AutoloaderException extends Exception {}
+
 class Autoloader
 {
     protected static $instance;
@@ -54,15 +57,25 @@ class Autoloader
      */
     public function load(string $class)
     {
-        if (@$this->Libs->$class){
-            include_once $this->Libs->$class->path;
+        $Class = @$this->Libs->$class;
+
+        if ($Class){
+            include_once $Class->path;
 
             class_alias(
-                $this->Libs->$class->name,
+                $Class->name,
                 $class
             );
         }else{
             include_once '../libs/'.str_replace('\\', '/', $class).'.php';
+        }
+
+        if (@$Class->interface){
+            if (!class_implements($class, $Class->interface)){
+                throw new AutoloaderException(
+                    'La clase '.$class.' debe implementar la interfaz '.$Class->interface
+                );
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ trait LazyLoader
 
     protected function cached(string $var)
     {
-        return ($this->cache[$var] ? true : false);
+        return (@$this->cache[$var] ? true : false);
     }
 
     protected function cache($var) : void
