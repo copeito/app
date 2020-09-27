@@ -18,7 +18,7 @@ class Table
 
         foreach (static::$db->query('show tables') as $row){
             $tables[] = new table(
-                $row['Tables_in_'.static::$db->dbname]
+                $row[0]
             );
         }
 

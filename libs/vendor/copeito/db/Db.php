@@ -1,11 +1,11 @@
 <?php
 namespace copeito\db;
 
-class Db extends \PDO implements \core\interfaces\Db
+class Db implements \core\interfaces\db\Db
 {
     public static $Table = Table::class;
 
-    protected $dbname;
+    protected $PDO;
 
     public function __construct(array $args = null)
     {
@@ -14,7 +14,7 @@ class Db extends \PDO implements \core\interfaces\Db
         }
 
         try{
-            parent::__construct(
+            $this->PDO = new \PDO(
                 strtolower($args['server']['type']).':'.
                     'host='.$args['server']['host'].';'.
                     'dbname='.$args['db']['name'],
@@ -24,27 +24,13 @@ class Db extends \PDO implements \core\interfaces\Db
                   \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
                 )
             );
-
-            $this->dbname = $args['db']['name'];
-
         }catch (PDOException $e){
             echo $e->getMessage();
         }
     }
 
-    public function __get($name) : string
-    {
-        $return = null;
-
-        if ($name == 'dbname'){
-            $return = $this->query('select database()')->fetchColumn();
-        }
-
-        return $return;
-    }
-
     public function query(string $stmt)
     {
-        return parent::query($stmt);
+        return $this->PDO->query($stmt);
     }
 }

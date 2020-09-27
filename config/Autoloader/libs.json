@@ -12,7 +12,7 @@
         "path" : "../libs/vendor/copeito/lazyLoader/LazyLoader.php"
     },
     "db\\Db" : {
-        "interface" : "core\\interfaces\\Db",
+        "interface" : "core\\interfaces\\db\\Db",
         "name" : "copeito\\db\\Db",
         "path" : "../libs/vendor/copeito/db/Db.php"
     },
