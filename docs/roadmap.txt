@@ -11,3 +11,8 @@ Insertar, actualizar y mostrar campos de una tabla en pantalla
 			db/Select extends Query
 
 Diseñar cómo y cuando se debe inicializar el objeto DB
+
+2021-04-06:
+	En App.php eliminar "\db\Table::setDb($db);" sin que pete
+
+	Definir en el interfaz Db.php el método "table" sin apuntar a "\copeito\db\Table" (buscar alternativa más genérica)

@@ -1,5 +1,7 @@
 <?php
-include_once '../libs/Autoloader.php';
+namespace core;
+
+include_once '../libs/core/Autoloader.php';
 
 Autoloader::init();
 

@@ -17,6 +17,7 @@
         "path" : "../libs/vendor/copeito/db/Db.php"
     },
     "db\\Table" : {
+        "interface" : "core\\interfaces\\db\\Table",
         "name" : "copeito\\db\\Table",
         "path" : "../libs/vendor/copeito/db/Table.php"
     }

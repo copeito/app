@@ -4,7 +4,9 @@
  *    @author David Rey
  */
 
-class AutoloaderException extends Exception {}
+namespace core;
+
+class AutoloaderException extends \Exception {}
 
 class Autoloader
 {
@@ -67,7 +69,17 @@ class Autoloader
                 $class
             );
         }else{
-            include_once '../libs/'.str_replace('\\', '/', $class).'.php';
+            /*
+             *    Si el nombre de la clase a cargar no comienza por "core", deduce
+             *    que se trata de un añadido al framework y le antepone el directorio
+             *    "vendor" al path
+             */
+            $lib_path = ((substr($class, 0, 4) == 'core') ?
+                '' :
+                '/vendor/'
+            ).str_replace('\\', '/', $class).'.php';
+
+            include_once '../libs/'.$lib_path;
         }
 
         if (@$Class->interface){

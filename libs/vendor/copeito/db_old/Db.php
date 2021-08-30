@@ -3,6 +3,8 @@ namespace copeito\db;
 
 class Db implements \core\interfaces\db\Db
 {
+    public static $Table = Table::class;
+
     protected $PDO;
 
     public function __construct(array $args = null)
@@ -23,7 +25,7 @@ class Db implements \core\interfaces\db\Db
         );
     }
 
-    public function tables(string $filter = null) : array
+    public function filter(string $filter = null) : array
     {
         $tables = array();
 
@@ -36,12 +38,14 @@ class Db implements \core\interfaces\db\Db
         return $tables;
     }
 
-    public function table(string $filter = null) : Table
+    public function filterOne(string $filter = null) : Table
     {
-        return $this->tables($filter)[0];
+        return array_pop(
+            $this->filter($filter)
+        );
     }
 
-    public function query(string $stmt) : \PDOStatement
+    public function query(string $stmt)
     {
         return $this->PDO->query($stmt);
     }
